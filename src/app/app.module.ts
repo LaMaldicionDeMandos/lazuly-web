@@ -8,12 +8,16 @@ import { AppComponent } from './app.component';
 import { SharedService } from "./shared/services/shared.service";
 import { routing } from './app.routing';
 import {AuthService} from "./auth.service";
+import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     routing
   ],
   declarations: [

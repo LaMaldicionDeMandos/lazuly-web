@@ -11,7 +11,7 @@
         <div class="col-sm-12">
           <div class="input-group">
             <div class="form-group">
-              <input type="text" class="form-control form-control-lg" placeholder="Email">
+              <input [(ngModel)]="user.username" type="text" name="username" class="form-control form-control-lg" placeholder="Email">
               <i class="form-group__bar"></i>
             </div>
           </div>
@@ -21,14 +21,14 @@
         <div class="col-sm-12">
           <div class="input-group">
             <div class="form-group">
-              <input type="text" class="form-control form-control-lg" placeholder="Contraseña">
+              <input [(ngModel)]="user.password" type="password" name="password" class="form-control form-control-lg" placeholder="Contraseña">
               <i class="form-group__bar"></i>
             </div>
           </div>
         </div>
       </div>
       <div class="btn-login">
-        <button type="button" class="btn btn-lg btn-primary float-right">Ingresar</button>
+        <button (click)="login()" type="button" class="btn btn-lg btn-primary float-right">Ingresar</button>
       </div>
     </div>
   </div>

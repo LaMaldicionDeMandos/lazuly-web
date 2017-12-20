@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Login} from "./login.model";
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'lazuly-login',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
+  user:Login = new Login();
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  login(): void {
+    console.log(`login -> username: ${this.user.username}, password: ${this.user.password}`);
+    this.authService.login(this.user);
   }
 
 }
