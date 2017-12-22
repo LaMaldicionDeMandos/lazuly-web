@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   user:Login = new Login();
-  forgetEmail:string;
+  forgotEmail:string;
   errors:boolean;
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -27,8 +27,9 @@ export class LoginComponent implements OnInit {
 
   }
 
-  forget():void {
-    console.log(`Peticion de regenerar contraseña para ${this.forgetEmail}`);
+  forgot():void {
+    this.authService.forgotPassword(this.forgotEmail)
+      .subscribe(() => console.log('success'), () => console.log('error'));
   }
 
   private goToDashboard(): void {

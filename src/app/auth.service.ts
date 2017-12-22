@@ -13,6 +13,7 @@ export class AuthService implements CanActivate {
 
   private loginUrl = `${environment.api_uri}/login`;
   private refreshUrl = `${environment.api_uri}/refresh`;
+  private forgotUrl = `${environment.api_uri}/forgot/`;
 
   constructor(private router: Router, private http:HttpClient) { }
 
@@ -89,6 +90,11 @@ export class AuthService implements CanActivate {
     localStorage.setItem('firstName', credentials.first_name);
     localStorage.setItem('credentials', JSON.stringify(credentials));
     console.log(JSON.stringify(credentials));
+  }
+
+  forgotPassword(email:string):Observable<any> {
+    console.log(`request new password for ${email}`);
+    return this.http.post(this.forgotUrl + email, null);
   }
 
 }

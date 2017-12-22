@@ -50,11 +50,11 @@
         </div>
         <div class="modal-body">
           Ingresá tu email y te enviaremos un mail para cambiar tu contraseña.
-          <input [(ngModel)]="forgetEmail" type="email" name="forgetPassword" class="form-control form-control-lg" placeholder="Email">
+          <input [(ngModel)]="forgotEmail" type="email" name="forgetPassword" class="form-control form-control-lg" placeholder="Email">
           <i class="form-group__bar"></i>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-link" (click)="ModalForgotPassword.hide();forget()">Enviar</button>
+          <button type="button" class="btn btn-link" (click)="ModalForgotPassword.hide();forgot()">Enviar</button>
         </div>
       </div>
     </div>
