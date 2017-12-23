@@ -14,6 +14,7 @@ export class AuthService implements CanActivate {
   private loginUrl = `${environment.api_uri}/login`;
   private refreshUrl = `${environment.api_uri}/refresh`;
   private forgotUrl = `${environment.api_uri}/forgot/`;
+  private restorePasswordUrl = `${environment.api_uri}/password/`;
 
   constructor(private router: Router, private http:HttpClient) { }
 
@@ -79,6 +80,11 @@ export class AuthService implements CanActivate {
   login(user: Login):Observable<Credentials> {
     console.log(JSON.stringify(user));
     return this.http.post(this.loginUrl, user).do((credentials: Credentials) => this.saveCredentials(credentials));
+  }
+
+  restorePassword(token:string, password:string):Observable<any> {
+    console.log(`Restore password: ${password} with token: ${token}`);
+    return this.http.patch(this.restorePasswordUrl + token , {password: password});
   }
 
   private saveCredentials(credentials: Credentials): void {
