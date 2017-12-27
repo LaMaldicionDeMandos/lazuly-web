@@ -87,13 +87,27 @@ export class AuthService implements CanActivate {
     return this.http.patch(this.restorePasswordUrl + token , {password: password});
   }
 
+  logout():void {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('expiresAt');
+    localStorage.removeItem('schoolId');
+    localStorage.removeItem('schoolName');
+    localStorage.removeItem('lastName');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('email');
+    localStorage.removeItem('credentials');
+  }
+
   private saveCredentials(credentials: Credentials): void {
     localStorage.setItem('accessToken', credentials.access_token);
     localStorage.setItem('refreshToken', credentials.refresh_token);
     localStorage.setItem('expiresAt', (new Date().getTime() + credentials.expires_in * 1000).toString());
     localStorage.setItem('schoolId', credentials.school_id.toString());
+    localStorage.setItem('schoolName', credentials.school_name);
     localStorage.setItem('lastName', credentials.last_name);
     localStorage.setItem('firstName', credentials.first_name);
+    localStorage.setItem('email', credentials.email);
     localStorage.setItem('credentials', JSON.stringify(credentials));
     console.log(JSON.stringify(credentials));
   }

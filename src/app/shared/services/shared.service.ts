@@ -24,10 +24,10 @@ export class SharedService {
 
     constructor()  {
         // Hidden the sidebar by default
-        this.sidebarVisible = false
+        this.sidebarVisible = false;
 
         // Set default theme as green
-        this.maTheme = 'green'
+        this.maTheme = 'green';
     }
 
 

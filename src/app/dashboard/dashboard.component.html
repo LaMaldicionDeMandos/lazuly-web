@@ -1,6 +1,5 @@
-<header class="header">
-  <div class="header__logo ">
-    <h1><a [routerLink]="['']">Lázuly</a></h1>
-  </div>
-</header>
-<h1>DASHBOARD!!!!</h1>
+<main class="main" [attr.data-ma-theme]="maTheme">
+  <lazuly-header></lazuly-header>
+  <lazuly-navigation></lazuly-navigation>
+  <router-outlet></router-outlet>
+</main>

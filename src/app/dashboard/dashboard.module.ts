@@ -1,21 +1,39 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+
+import { NgModule } from "@angular/core";
+import { DashboardRouting } from "./dashboard.routing";
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { ButtonsModule } from 'ngx-bootstrap';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { DashboardComponent } from "./dashboard.component";
+import { HeaderComponent } from './header/header.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationTriggerComponent } from './header/navigation-trigger/navigation-trigger.component';
 
-const DASHBOARD_ROUTES = [
-    { path: '', component: DashboardComponent }
-];
+const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+}
 
 @NgModule ({
-    declarations: [
-        DashboardComponent
-    ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(DASHBOARD_ROUTES)
-    ]
+  declarations: [
+    DashboardComponent,
+    HeaderComponent,
+    NavigationComponent,
+    NavigationTriggerComponent
+  ],
+  imports: [
+    CommonModule,
+    DashboardRouting,
+    FormsModule,
+    BsDropdownModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    ButtonsModule.forRoot(),
+    PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
+  ]
 })
 
 export class DashboardModule {  }

@@ -21,7 +21,8 @@
         <div class="col-sm-12">
           <div class="input-group">
             <div class="form-group">
-              <input [(ngModel)]="user.password" type="password" name="password" class="form-control form-control-lg" placeholder="Contraseña">
+              <input [(ngModel)]="user.password" type="password" name="password" class="form-control form-control-lg" placeholder="Contraseña"
+                     (keyup.enter)="login()">
               <i class="form-group__bar"></i>
             </div>
           </div>
@@ -38,7 +39,7 @@
         </alert>
       </div>
       <div class="btn-login">
-        <button (click)="login()" type="button" class="btn btn-lg btn-primary float-right">Ingresar</button>
+        <button (click)="login()" (keyup.enter)="login()" type="button" class="btn btn-lg btn-primary float-right">Ingresar</button>
       </div>
     </div>
   </div>

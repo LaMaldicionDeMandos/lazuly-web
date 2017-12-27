@@ -7,6 +7,8 @@ export class Credentials {
   expires_in: number;
   scope: string;
   school_id: number;
+  school_name: string;
   last_name: string;
   first_name: string;
+  email: string;
 }
