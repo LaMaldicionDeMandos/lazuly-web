@@ -25,7 +25,9 @@ import {Credentials} from "../../credentials";
 })
 
 export class NavigationComponent implements OnInit {
+    USER_CRUD:string = "user_crud";
     sidebarVisible: boolean;
+    crudUserPermission: boolean;
 
     // Sub menu visibilities
     navigationSubState:any = {
@@ -40,6 +42,7 @@ export class NavigationComponent implements OnInit {
     firstName:string;
     lastName:string;
     email:string;
+
 
     // Toggle sub menu
     toggleNavigationSub(menu, event) {
@@ -58,6 +61,9 @@ export class NavigationComponent implements OnInit {
       this.firstName = credentials.first_name;
       this.lastName = credentials.last_name;
       this.email = credentials.email;
+      this.authService.hasPermission(this.USER_CRUD).subscribe((has) => {
+        console.log("has user_crud? " + has);
+        this.crudUserPermission = has;});
     }
 
     logout():void {

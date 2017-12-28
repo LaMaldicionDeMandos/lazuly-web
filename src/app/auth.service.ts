@@ -3,10 +3,12 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from "
 import {Observable} from "rxjs";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
-import {HttpClient} from "@angular/common/http";
+import 'rxjs/add/observable/of';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Login} from "./login/login.model";
 import { environment } from '../environments/environment';
 import {Credentials} from "./credentials";
+import _ from "lodash";
 
 @Injectable()
 export class AuthService implements CanActivate {
@@ -15,6 +17,7 @@ export class AuthService implements CanActivate {
   private refreshUrl = `${environment.api_uri}/refresh`;
   private forgotUrl = `${environment.api_uri}/forgot/`;
   private restorePasswordUrl = `${environment.api_uri}/password/`;
+  private permissionsUrl = `${environment.api_uri}/users/me/permissions`;
 
   constructor(private router: Router, private http:HttpClient) { }
 
@@ -115,6 +118,17 @@ export class AuthService implements CanActivate {
   forgotPassword(email:string):Observable<any> {
     console.log(`request new password for ${email}`);
     return this.http.post(this.forgotUrl + email, null);
+  }
+
+  hasPermission(permissionName:string):Observable<boolean> {
+    let headers:HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', `bearer ${this.getAccessToken()}`);
+    const options = {headers: headers};
+    return this.http.get(this.permissionsUrl, options)
+      .map((result) => {
+        const permission = _.find(result, {name: permissionName});
+        return permission && permission.name == permissionName;
+      });
   }
 
 }
