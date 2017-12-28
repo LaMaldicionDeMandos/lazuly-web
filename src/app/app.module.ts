@@ -10,6 +10,7 @@ import { routing } from './app.routing';
 import {AuthService} from "./auth.service";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {UsersService} from "./users.service";
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import {HttpClientModule} from "@angular/common/http";
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    AuthService
+    AuthService,
+    UsersService
   ],
   bootstrap: [AppComponent]
 })

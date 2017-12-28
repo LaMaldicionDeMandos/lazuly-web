@@ -1,0 +1,44 @@
+<section class="content">
+    <header class="content__title">
+        <h1>Usuarios</h1>
+        <small>Aministración de usuarios</small>
+    </header>
+
+    <div class="row">
+      <div *ngFor="let user of users" class="col-xl-2 col-lg-3 col-sm-4 col-6">
+        <div class="card card--inverse widget-profile">
+          <div class="card-body">
+            <div class="text-center">
+              <img [src]="user.image" class="widget-profile__img"/>
+              <h4 class="card-title">{{user.first_name}} {{user.last_name}}</h4>
+              <small>{{user.email}}</small>
+              <h4 class="card-title">{{user.job_title}}</h4>
+              <div *ngFor="let role of user.roles" class="badge badge-pill badge-secondary badge-space">
+                <span>{{role.name}}</span>
+                <a class="close-space"><i class="zmdi zmdi-close"></i></a>
+              </div>
+              <div class="actions actions--inverse">
+                <div dropdown class="actions__item">
+                  <i dropdownToggle class="zmdi zmdi-more-vert"></i>
+                  <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item">Agregar Rol</a>
+                    <a class="dropdown-item">Eliminar</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-3 col-sm-4 col-6">
+        <div class="card card--inverse widget-profile-plus">
+          <div class="card-body">
+            <div class="text-center">
+              <div class="zmdi zmdi-account-add zmdi-hc-5x" ></div>
+              <h4 class="card-title-plus">Agregar nuevo usuario</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
