@@ -26,7 +26,18 @@ export class UsersService {
     const options = {headers: headers};
     console.log(`uri: ${this.url}/${user.email}`);
     let result:Observable<any> = this.http.put(`${this.url}/${user.email}`, user, options);
-    result.subscribe(() => console.log('Andu!!', (err) => `Error: ${err}`));
+    result.subscribe(() => console.log('Andu!!'), (err) => console.log(`Error: ${err}`));
+    return result;
+  }
+
+  deleteUser(user:User):Observable<any> {
+    console.log('Call to delete user ' + user.email);
+    let headers:HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', `bearer ${this.authService.getAccessToken()}`);
+    const options = {headers: headers};
+    console.log(`uri: ${this.url}/${user.email}`);
+    let result:Observable<any> = this.http.delete(`${this.url}/${user.email}`, options);
+    result.subscribe(() => console.log('Andu!!'), (err) => console.log(`Error: ${err}`));
     return result;
   }
 

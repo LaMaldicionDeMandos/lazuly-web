@@ -39,6 +39,28 @@ export class UsersComponent implements OnInit {
 
     removeUser(user:User) {
       console.log(`Removing user ${user.email}`);
+      swal({
+        text: "Estás por elininar un usuario, realmente queres eliminarlo?",
+        confirmButtonText: 'si, eliminar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-secondary',
+        showCancelButton: true,
+        buttonsStyling: false,
+        type: 'warning'
+      }).then((result) => {
+        if (result.dismiss !== 'cancel') {
+          this.userService.deleteUser(user).subscribe(() => _.remove(this.users, (u) => u.email === user.email), () =>
+            swal({
+              html: "<span style='color:#ffffff'>Ops, parece que no pudimos eliminar el usuario, por favor intenta mas tarde.</span>",
+              background: '#ff6b68',
+              position: 'top',
+              toast: true,
+              timer: 2500,
+              showConfirmButton: false
+            }));
+        }
+      });
     }
 
     removeRole(role:Role, user:User) {
