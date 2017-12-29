@@ -19,4 +19,15 @@ export class UsersService {
     return this.http.get(this.url, options);
   }
 
+  changeUser(user:User):Observable<any> {
+    console.log('Call to change user ');
+    let headers:HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', `bearer ${this.authService.getAccessToken()}`);
+    const options = {headers: headers};
+    console.log(`uri: ${this.url}/${user.email}`);
+    let result:Observable<any> = this.http.put(`${this.url}/${user.email}`, user, options);
+    result.subscribe(() => console.log('Andu!!', (err) => `Error: ${err}`));
+    return result;
+  }
+
 }

@@ -4,6 +4,7 @@ import {User} from "../../model/user";
 import {AuthService} from "../../auth.service";
 import {Role} from "../../model/role";
 import _ from "lodash";
+import swal from "sweetalert2";
 
 @Component({
     selector: 'lazuly-users',
@@ -32,16 +33,38 @@ export class UsersComponent implements OnInit {
       return _.some(user.roles, (r) => r.code == role.code);
     }
 
+    private removeRoleFrom(user, role) {
+      _.remove(user.roles, (r) => r.code === role.code);
+    }
+
     removeUser(user:User) {
       console.log(`Removing user ${user.email}`);
     }
 
     removeRole(role:Role, user:User) {
-      console.log(`Removing role ${role.code} from user ${user.email}`);
+      this.removeRoleFrom(user, role);
+      this.userService.changeUser(user).subscribe(() => console.log('success'), () =>
+        swal({
+          html: "<span style='color:#ffffff'>Ops, parece que no pudimos eliminar el rol de este usuario, por favor intenta mas tarde.</span>",
+          background: '#ff6b68',
+          position: 'top',
+          toast: true,
+          timer: 2500,
+          showConfirmButton: false
+        }));
     }
 
     addRole(role:Role, user:User) {
-      console.log(`Adding role ${role.code} to user ${user.email}`);
+      user.roles.push(role);
+      this.userService.changeUser(user).subscribe(() => console.log('success'), () =>
+        swal({
+          html: "<span style='color:#ffffff'>Ops, parece que no pudimos agregar el rol de este usuario, por favor intenta mas tarde.</span>",
+          background: '#ff6b68',
+          position: 'top',
+          toast: true,
+          timer: 2500,
+          showConfirmButton: false
+        }));
     }
 
 }
