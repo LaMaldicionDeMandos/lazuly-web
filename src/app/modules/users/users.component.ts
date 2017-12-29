@@ -89,4 +89,8 @@ export class UsersComponent implements OnInit {
         }));
     }
 
+    addUser() {
+      console.log('Add user');
+    }
+
 }

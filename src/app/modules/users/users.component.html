@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-2 col-lg-3 col-sm-4 col-6">
+      <a class="col-xl-2 col-lg-3 col-sm-4 col-6" (click)="addUser();ModalNewUser.show()">
         <div class="card card--inverse widget-profile-plus">
           <div class="card-body">
             <div class="text-center">
@@ -40,6 +40,42 @@
             </div>
           </div>
         </div>
+      </a>
+    </div>
+  <div bsModal #ModalNewUser="bs-modal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title pull-left">Nuevo usuario</h5>
+        </div>
+        <div class="modal-body">
+          <div>Por favor complete el formulario para crear un nuevo usuario.</div>
+          <div class="form-group form-group--float">
+            <input type="email" class="form-control form-control-lg" formControlFloat>
+            <label>Email</label>
+            <i class="form-group__bar"></i>
+          </div>
+          <div class="form-group form-group--float">
+            <input type="text" class="form-control form-control-sm" formControlFloat>
+            <label>Nombres</label>
+            <i class="form-group__bar"></i>
+          </div>
+          <div class="form-group form-group--float">
+            <input type="text" class="form-control form-control-sm" formControlFloat>
+            <label>Apellido</label>
+            <i class="form-group__bar"></i>
+          </div>
+          <div class="form-group form-group--float">
+            <input type="text" class="form-control form-control-sm" formControlFloat>
+            <label>Cargo</label>
+            <i class="form-group__bar"></i>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-link" (click)="ModalNewUser.hide();forgot()">Crear</button>
+        </div>
       </div>
     </div>
+  </div>
+
 </section>

@@ -41,4 +41,22 @@ export class UsersService {
     return result;
   }
 
+  addUser(user:User):Observable<User> {
+    console.log('Call to add user ' + user.email);
+    let headers:HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', `bearer ${this.authService.getAccessToken()}`);
+    const options = {headers: headers};
+    console.log(`uri: ${this.url}`);
+    let request = {
+      email: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      job_title: user.job_title,
+      roles: user.roles.map((role) => role.code)
+    };
+    let result:Observable<User> = this.http.post(this.url, request, options);
+    result.subscribe(() => console.log('Andu!!'), (err) => console.log(`Error: ${err}`));
+    return result;
+  }
+
 }

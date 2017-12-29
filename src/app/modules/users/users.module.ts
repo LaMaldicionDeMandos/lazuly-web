@@ -5,6 +5,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SharedModule } from "../../shared/shared.module";
 
 import { UsersComponent } from "./users.component";
+import {AlertModule, ModalModule} from "ngx-bootstrap";
+import {FormsModule} from "@angular/forms";
 
 const USERS_ROUTE = [
     { path: '', component: UsersComponent }
@@ -18,6 +20,9 @@ const USERS_ROUTE = [
         CommonModule,
         SharedModule,
         BsDropdownModule.forRoot(),
+        AlertModule.forRoot(),
+        ModalModule.forRoot(),
+        FormsModule,
         RouterModule.forChild(USERS_ROUTE)
     ]
 })
