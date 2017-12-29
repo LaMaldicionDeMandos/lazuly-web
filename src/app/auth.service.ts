@@ -9,6 +9,7 @@ import {Login} from "./login/login.model";
 import { environment } from '../environments/environment';
 import {Credentials} from "./credentials";
 import _ from "lodash";
+import {Role} from "./model/role";
 
 @Injectable()
 export class AuthService implements CanActivate {
@@ -18,6 +19,9 @@ export class AuthService implements CanActivate {
   private forgotUrl = `${environment.api_uri}/forgot/`;
   private restorePasswordUrl = `${environment.api_uri}/password/`;
   private permissionsUrl = `${environment.api_uri}/users/me/permissions`;
+  private rolesUrl = `${environment.api_uri}/roles`;
+
+  private roles:Role[];
 
   constructor(private router: Router, private http:HttpClient) { }
 
@@ -131,4 +135,7 @@ export class AuthService implements CanActivate {
       });
   }
 
+  getRolesBo():Observable<Role[]> {
+    return (this.roles) ? Observable.of(this.roles) : this.http.get(this.rolesUrl).do((roles:Role[]) => this.roles = roles);
+  }
 }

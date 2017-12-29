@@ -14,4 +14,9 @@ export class User {
   printRoles():string {
     return _.chain(this.roles).map((role) => role.name).join(', ').value();
   }
+
+
+  hasRole(role:Role):boolean {
+    return _.some(this.roles, (r) => r.code == role.code);
+  }
 }
