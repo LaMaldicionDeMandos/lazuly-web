@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-      <a class="col-xl-2 col-lg-3 col-sm-4 col-6" (click)="addUser();ModalNewUser.show()">
+      <a class="col-xl-2 col-lg-3 col-sm-4 col-6" (click)="ModalNewUser.show()">
         <div class="card card--inverse widget-profile-plus">
           <div class="card-body">
             <div class="text-center">
@@ -43,7 +43,7 @@
       </a>
     </div>
   <div bsModal #ModalNewUser="bs-modal" class="modal fade">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog lazuly-modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title pull-left">Nuevo usuario</h5>
@@ -51,28 +51,59 @@
         <div class="modal-body">
           <div>Por favor complete el formulario para crear un nuevo usuario.</div>
           <div class="form-group form-group--float">
-            <input type="email" class="form-control form-control-lg" formControlFloat>
-            <label>Email</label>
+            <input [(ngModel)]="newUser.email" autofocus required email type="email" class="form-control" formControlFloat
+                   #email="ngModel" [class.is-invalid]="email.invalid && email.errors">
+            <label>Email *</label>
             <i class="form-group__bar"></i>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+              <small *ngIf="email.errors.required">
+                El Email es obligatorio.
+              </small>
+              <small *ngIf="email.errors.email">
+                Tiene que ser un email válido.
+              </small>
+            </div>
           </div>
           <div class="form-group form-group--float">
-            <input type="text" class="form-control form-control-sm" formControlFloat>
-            <label>Nombres</label>
+            <input [(ngModel)]="newUser.first_name" required type="text" class="form-control" formControlFloat
+              #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.errors">
+            <label>Nombre *</label>
             <i class="form-group__bar"></i>
+            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+              <small *ngIf="firstName.errors.required">
+                El nombre es obligatorio.
+              </small>
+            </div>
           </div>
           <div class="form-group form-group--float">
-            <input type="text" class="form-control form-control-sm" formControlFloat>
-            <label>Apellido</label>
+            <input [(ngModel)]="newUser.last_name" required type="text" class="form-control" formControlFloat
+                   #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.errors">
+            <label>Apellido *</label>
             <i class="form-group__bar"></i>
+            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+              <small *ngIf="lastName.errors.required">
+                El apellido es obligatorio.
+              </small>
+            </div>
           </div>
           <div class="form-group form-group--float">
-            <input type="text" class="form-control form-control-sm" formControlFloat>
+            <input [(ngModel)]="newUser.job_title" type="text" class="form-control" formControlFloat>
             <label>Cargo</label>
             <i class="form-group__bar"></i>
           </div>
+          <div class="form-group form-group--select" formcontrolfloat>
+            <label>Rol *</label>
+            <div class="select">
+              <select [(ngModel)]="selectedRole" class="form-control">
+                <option *ngFor="let role of roles" [ngValue]="role">{{role.name}}</option>
+              </select>
+              <i class="form-group__bar"></i>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-link" (click)="ModalNewUser.hide();forgot()">Crear</button>
+          <button *ngIf="!email.invalid && !lastName.invalid && !firstName.invalid && selectedRole"
+            type="button" class="btn btn-link" (click)="addUser(ModalNewUser)">Crear</button>
         </div>
       </div>
     </div>

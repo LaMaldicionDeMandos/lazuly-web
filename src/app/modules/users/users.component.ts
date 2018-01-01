@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../../users.service";
 import {User} from "../../model/user";
 import {AuthService} from "../../auth.service";
@@ -13,8 +13,13 @@ import swal from "sweetalert2";
 })
 
 export class UsersComponent implements OnInit {
+
     users:User[];
     roles:Role[];
+
+    // New USer form
+    newUser:User = new User();
+    selectedRole:Role;
 
     constructor(private userService:UsersService, private authService:AuthService) {
 
@@ -89,8 +94,23 @@ export class UsersComponent implements OnInit {
         }));
     }
 
-    addUser() {
-      console.log('Add user');
+    addUser(modal) {
+      modal.hide();
+      console.log(`New User ${JSON.stringify(this.newUser)} con su role ${JSON.stringify(this.selectedRole)}`);
+      this.newUser.roles = [this.selectedRole];
+      this.userService.addUser(this.newUser).subscribe(
+        (user) => {
+          this.users.push(this.newUser);
+          this.newUser = new User();
+        },
+        (err) => swal({
+          html: "<span style='color:#ffffff'>Ops, parece que no pudimos agregar este usuario, por favor intenta mas tarde.</span>",
+          background: '#ff6b68',
+          position: 'top',
+          toast: true,
+          timer: 2500,
+          showConfirmButton: false
+        }));
     }
 
 }
