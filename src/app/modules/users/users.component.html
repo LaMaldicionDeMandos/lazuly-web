@@ -9,7 +9,9 @@
         <div class="card card--inverse widget-profile">
           <div class="card-body">
             <div class="text-center">
-              <img [src]="user.image" class="widget-profile__img"/>
+              <lazuly-avatar [url]="user.image" [email]="user.email" [name]="user.first_name + ' ' + user.last_name"
+                             [displayType]="'circle'" [size]="'110'" ></lazuly-avatar>
+              <!-- <img [src]="user.image" class="widget-profile__img"/> -->
               <h4 class="card-title">{{user.first_name}} {{user.last_name}}</h4>
               <small>{{user.email}}</small>
               <h4 class="card-title">{{user.job_title}}</h4>

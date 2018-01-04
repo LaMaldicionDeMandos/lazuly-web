@@ -14,6 +14,8 @@ import { HeaderComponent } from './header/header.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NavigationTriggerComponent } from './header/navigation-trigger/navigation-trigger.component';
 
+import { LazulyAvatarModule } from '../modules/avatar/lazuly-avatar.module';
+
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 }
@@ -32,7 +34,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     ButtonsModule.forRoot(),
-    PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
+    PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
+    LazulyAvatarModule.forRoot()
   ]
 })
 

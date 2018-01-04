@@ -3,7 +3,8 @@
 
         <div class="user" dropdown>
             <div class="user__info" dropdownToggle>
-                <img class="user__img" src="" alt="MP">
+                <lazuly-avatar [url]="image" [email]="email" [name]="name" [displayType]="'circle'"
+                [size]="'36'" ></lazuly-avatar>
                 <div>
                     <div class="user__name">{{firstName}} {{lastName}}</div>
                     <div class="user__email">{{email}}</div>

@@ -41,6 +41,7 @@ export class NavigationComponent implements OnInit {
 
     firstName:string;
     lastName:string;
+    name:string;
     email:string;
 
 
@@ -60,7 +61,9 @@ export class NavigationComponent implements OnInit {
       let credentials:Credentials = this.authService.getCredentials();
       this.firstName = credentials.first_name;
       this.lastName = credentials.last_name;
+      this.name = `${this.firstName} ${this.lastName}`.trim();
       this.email = credentials.email;
+
       this.authService.hasPermission(this.USER_CRUD).subscribe((has) => {
         console.log("has user_crud? " + has);
         this.crudUserPermission = has;});

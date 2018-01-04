@@ -8,13 +8,15 @@ import { UsersComponent } from "./users.component";
 import {AlertModule, ModalModule} from "ngx-bootstrap";
 import {FormsModule} from "@angular/forms";
 
+import { LazulyAvatarModule } from '../avatar/lazuly-avatar.module';
+
 const USERS_ROUTE = [
     { path: '', component: UsersComponent }
 ];
 
 @NgModule ({
     declarations: [
-        UsersComponent,
+        UsersComponent
     ],
     imports: [
         CommonModule,
@@ -23,7 +25,8 @@ const USERS_ROUTE = [
         AlertModule.forRoot(),
         ModalModule.forRoot(),
         FormsModule,
-        RouterModule.forChild(USERS_ROUTE)
+        RouterModule.forChild(USERS_ROUTE),
+        LazulyAvatarModule.forRoot()
     ]
 })
 
