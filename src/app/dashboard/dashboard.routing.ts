@@ -7,6 +7,7 @@ const DASHBOARD_ROUTES: Routes = [
         { path: 'home', loadChildren: '../modules/home/home.module#HomeModule' },
         { path: 'users', loadChildren: '../modules/users/users.module#UsersModule' },
         { path: 'teachers', loadChildren: '../modules/teachers/teachers.module#TeachersModule' },
+        { path: 'profile', loadChildren: '../modules/profile/profile.module#ProfileModule' },
 
     ]}
 ];
