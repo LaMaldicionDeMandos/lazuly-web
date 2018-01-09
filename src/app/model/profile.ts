@@ -11,6 +11,7 @@ export class Profile {
   email: string;
   image: string;
   summary: string;
+  bird_date: string;
   phone: string;
   contact_email: string;
   facebook: string;
