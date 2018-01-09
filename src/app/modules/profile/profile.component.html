@@ -1,7 +1,7 @@
 <section class="content">
   <header class="content__title">
-    <h1>Marcelo Pasut</h1>
-    <small>Software Ingenieer</small>
+    <h1>{{profile.first_name}} {{profile.last_name}}</h1>
+    <small>{{profile.job_title}}</small>
   </header>
 
   <div class="card" id="profile-main">
@@ -11,7 +11,7 @@
           <div class="pmo-pic">
             <div class="p-relative">
               <a href="">
-                <img class="img-responsive" src="https://img.buzzfeed.com/buzzfeed-static/static/2014-04/tmp/webdr02/2/17/0e7cd6da3ce720d983515a9ab831a530-3.jpg?downsize=715:*&output-format=auto&output-quality=auto">
+                <img class="img-responsive" [src]="profile.image">
               </a>
               <div class="dropdown pmop-message">
                 <button class="btn bgm-white btn-float dropdown-toggle waves-effect waves-circle">
@@ -24,33 +24,30 @@
               </a>
             </div>
             <div class="pmo-stat">
-              <h2 class="m-0 c-white">Marcelo Pasut</h2>
-              <span>Ingeniero</span>
+              <h2 class="m-0 c-white">{{profile.first_name}} {{profile.last_name}}</h2>
+              <span>{{profile.job_title}}</span>
             </div>
           </div>
           <div class="pmo-block pmo-contact hidden-xs">
             <h2>Contacto</h2>
 
             <ul>
-              <li><i class="zmdi zmdi-phone"></i> 15-6408-0807</li>
+              <li *ngIf="profile.phone"><i class="zmdi zmdi-phone"></i> {{profile.phone}}</li>
 
-              <li><i class="zmdi zmdi-email"></i>
-                <a href="mailto://pasutmarcelo@gmail.com">
-                  pasutmarcelo@gmail.com
+              <li *ngIf="profile.contact_email"><i class="zmdi zmdi-email"></i>
+                <a href="mailto://{{profile.contact_email}}">
+                  {{profile.contact_email}}
                 </a></li>
-              <li><i class="zmdi zmdi-facebook-box"></i>
-                marcelopasut</li>
+              <li *ngIf="profile.facebook"><i class="zmdi zmdi-facebook-box"></i>
+                {{profile.facebook}}</li>
 
 
-              <li><i class="zmdi zmdi-skype"></i> mpasut</li>
-              <li><i class="zmdi zmdi-twitter"></i> @LaMaldicionDeMandos </li>
-              <li>
+              <li *ngIf="profile.skype"><i class="zmdi zmdi-skype"></i> {{profile.skype}}</li>
+              <li *ngIf="profile.twitter"><i class="zmdi zmdi-twitter"></i> {{profile.twitter}}</li>
+              <li *ngIf="profile.address">
                 <i class="zmdi zmdi-pin"></i>
                 <address class="m-b-0">
-                  Lavalleja, <br/>
-                  1745, <br/>
-                  Quilmes Oeste, <br/>
-                  Buenos Aires
+                  {{profile.address}}
                 </address>
               </li>
             </ul>
@@ -65,21 +62,21 @@
             <i class="zmdi zmdi-equalizer"></i>
             Resumen
           </h2>
-          <div class="actions">
+          <div class="actions" (click)="editSummary = true">
             <div dropdown>
-              <i class="actions__item zmdi zmdi-edit"></i>
+              <i class="actions__item zmdi zmdi-edit" ></i>
             </div>
           </div>
         </div>
         <div class="p-l-30">
-          <div *ngIf="false" class="form-control-label">Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna, ornare sit amet mollis eu, aliquet ac ligula. Nullam dolor metus, suscipit ac imperdiet nec, consectetur sed ex. Sed cursus porttitor leo.</div>
-          <form *ngIf="true" class="pmbb-edit">
+          <div [hidden]="editSummary" class="form-control-label">{{profile.summary}}</div>
+          <form [hidden]="!editSummary" class="pmbb-edit">
             <div class="fg-line">
-              <textarea class="form-control" rows="5" placeholder="Resumen">Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna, ornare sit amet mollis eu, aliquet ac ligula. Nullam dolor metus, suscipit ac imperdiet nec, consectetur sed ex. Sed cursus porttitor leo.</textarea>
+              <textarea [(ngModel)]="profile.summary" name="profileSummary" class="form-control" rows="5" placeholder="Resumen" >{{profile.summary}}</textarea>
             </div>
             <div class="m-t-10">
-              <button class="btn btn-primary btn-sm waves-effect" type="submit">Guardar</button>
-              <button class="btn btn-link btn-sm waves-effect" type="submit">Cancelar</button>
+              <button class="btn btn-primary btn-sm waves-effect" type="submit" (click)="changeSummary()">Guardar</button>
+              <button class="btn btn-link btn-sm waves-effect" type="submit" (click)="editSummary = false" )>Cancelar</button>
             </div>
           </form>
         </div>
@@ -97,7 +94,7 @@
           </div>
         </div>
         <div class="p-l-30">
-          <div *ngIf="false">
+          <div [hidden]="!editBasic">
             <dl class="dl-horizontal">
               <dt>Nombre</dt>
               <dd>Marcelo</dd>
@@ -183,7 +180,7 @@
             </dl>
             <dl class="dl-horizontal">
               <dt><i class="zmdi zmdi-facebook-box"></i> Facebook</dt>
-              <dd>marcelopasut</dd>
+              <dd>marcelo.pasut</dd>
             </dl>
             <dl class="dl-horizontal">
               <dt><i class="zmdi zmdi-skype"></i> Skype</dt>
@@ -221,7 +218,7 @@
               <dt class="p-t-10"><i class="zmdi zmdi-facebook-box"></i> Facebook</dt>
               <dd>
                 <div class="fg-line">
-                  <input type="text" class="form-control" placeholder="Ej. marcelopasut">
+                  <input type="text" class="form-control" placeholder="Ej. marcelo.pasut">
                   <i class="form-group__bar"></i>
                 </div>
               </dd>
